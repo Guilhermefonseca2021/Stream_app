@@ -1,8 +1,9 @@
 import { Request, Response, Router } from "express";
+import { videoUpload } from "../middleware/videoUpload";
+import { addVideo, getAllVideos } from "../controllers/video";
 const route = Router()
 
-route.get("/", (req: Request, res: Response) => {
-    res.send('Hello world!')
-});
+route.post("/upload", videoUpload.single('video'),  addVideo)
+    .get('/videos', getAllVideos)
 
 export default route
