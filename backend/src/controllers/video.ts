@@ -5,7 +5,7 @@ import Video from "../types/video";
 export async function addVideo(req: Request, res: Response) {
   const { title, description }: Video = req.body;
   const videoPath = req.file?.path;
-  
+
   try {
     const video = new VideoShema({
       title,
@@ -27,5 +27,17 @@ export async function getAllVideos(req: Request, res: Response) {
     res.status(200).json({ videos });
   } catch (err) {
     res.status(200).json({ message: `videos fetch failed ${err}` });
+  }
+}
+
+export async function getVideoById(req: Request, res: Response) {
+  const { id } = req.params;
+
+  try {
+    const videoId = await VideoShema.findById(id);
+
+    res.status(200).json(videoId);
+  } catch (err) {
+    res.status(200).json({ message: `video fetch failed ${err}` });
   }
 }

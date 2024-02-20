@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../utils/api";
 import VideoProps from "../../types/video";
 import Video from "../components/Video";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
   const [data, setData] = useState<VideoProps[]>([]);
@@ -18,11 +18,11 @@ export default function Home() {
 
   return (
     <div className="m-4">
-      <h1 className="text-3xl font-bold p-1 text-center">Streaming ON</h1>
+      <h1 className="text-3xl font-bold p-1 text-center">Mon stream📍</h1>
       <div className="flex items-center">
         {data?.map((video) => {
           return (
-            <Link to={`/videos/${video._id}`} key={video._id}>
+            <NavLink to={`/videos/${video._id}`} key={video._id}>
               <Video
                 key={video._id}
                 title={video.title}
@@ -30,7 +30,7 @@ export default function Home() {
                 videoUrl={video.videoUrl}
                 filename={video.filename}
               />
-            </Link>
+            </NavLink>
           );
         })}
       </div>

@@ -1,21 +1,18 @@
-import { useParams } from "react-router-dom"
-import VideoJS from "../components/VideoJS"
+import { useParams } from "react-router-dom";
+import VideoPlay from "./VideoPlayer";
+import useFetchVideoUrl from "../hook/useFetchVideoUrl";
 
 export default function VideoPlayer() {
-  const { id } = useParams()
-
-  const videoOptions = {
-    autoplay: false,
-    controls: true,
-    fluid: true,
-    alwaysShowControls: true,
-    source: [{
-      src: 0,
-    }]
-  }
+  const { id } = useParams();
+  const { video } = useFetchVideoUrl(id!);
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="App">
+      <div className="w-full justify-center">
+        <VideoPlay />
+        <h4>{video?.title}</h4>
+        <p>{video?.description}</p>
+      </div>
     </div>
-  )
+  );
 }

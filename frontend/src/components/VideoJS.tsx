@@ -1,34 +1,9 @@
-import { useRef, useEffect } from 'react';
-import videojs from 'video.js';
-import 'video.js/dist/video-js.css';
+import ReactPlayer from "react-player";
 
-export default function VideoJS(src: string) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<videojs.Player>();
-
-  useEffect(() => {
-    // Initialize Video.js player
-    playerRef.current = videojs(videoRef.current || '', {}, () => {
-      console.log('Player is ready');
-    });
-
-    // Load the video source
-    playerRef.current.src({
-      src,
-      type: 'video/mp4',
-    });
-
-    // Cleanup when component unmounts
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.dispose();
-      }
-    };
-  }, [src]);
-
+export default function VideoPlay(url: string) {
   return (
-    <div data-vjs-player>
-      <video ref={videoRef} className="video-js" />
+    <div>
+      <ReactPlayer url={url} controls width="100%" height="100%" />
     </div>
   );
 }
